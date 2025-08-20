@@ -1,7 +1,42 @@
-.logo {
-  width: 300px;
+body {
+  margin: 0;
 }
 
-.logo img{
-  width: 100%;
+.hero img {
+  width: 100vw;
+  height: 50vh;
+  display: block;
+  object-fit: cover;
 }
+
+.row {
+  display: flex;
+  width: 100vw;
+  height: auto;
+  margin-top: 80px;
+}
+
+.margin {
+  width: 16.66vw;
+}
+
+.container {
+  width: 33.33vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-container img {
+  width: 100%;
+  max-height: 300px;
+  height: auto;
+  display: block;
+}
+.calendar img {
+  width: 100%;
+  max-height: 300px;
+  height: auto;
+  display: block;
+}
+
