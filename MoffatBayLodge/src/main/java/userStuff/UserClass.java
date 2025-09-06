@@ -44,6 +44,11 @@ public class UserClass {
     public int getCustomerId() {
         return customerId;
     }
+    
+    public Connection getConnection() {
+        return connection;
+    }
+
 
     // Validates user by email and plain password using bcrypt hash check
     public boolean loginCheck(String email, String plainPassword) {

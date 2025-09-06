@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&family=Roboto&display=swap" rel="stylesheet">
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="styles.css" />
+   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
@@ -59,14 +59,14 @@
 
     <div class="login">
       <button type="submit" class="btn primary">Login</button>
-      <button type="button" class="btn primary">Reset Password</button>
+       <button type="button" class="btn primary" onclick="window.location.href='resetRequest.jsp'">Reset Password</button>
     </div>
     
   </form>
 
   <div class="signup-section">
     <p>Don't have an account? <br> No worries! Create an account here: </p>
-    <button type="button" class="btn primary">Sign Up</button>
+    <button type="button" class="btn primary" onclick="window.location.href='registration.jsp'">Sign Up</button>
   </div>
 </section>
 
