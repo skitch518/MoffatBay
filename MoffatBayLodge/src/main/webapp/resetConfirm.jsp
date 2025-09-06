@@ -1,4 +1,4 @@
-<%@ page import="com.moffatbay.util.DatabaseBean" %>
+<%@ page import="userStuff.UserClass" %>
 <%@ page import="java.sql.*" %>
 <%@ page import="org.mindrot.jbcrypt.BCrypt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -12,7 +12,7 @@
     if (email == null || newPassword == null || email.trim().isEmpty() || newPassword.trim().isEmpty()) {
         out.println("<p>Missing email or new password.</p>");
     } else {
-        DatabaseBean db = new DatabaseBean(); // New db connection
+    	UserClass db = new UserClass(); // New db connection
         String hashedPassword = BCrypt.hashpw(newPassword, BCrypt.gensalt()); //Hash password with BCrypt
 
         String sql = "UPDATE CustomerLogin SET password_hash = ? WHERE email = ?";

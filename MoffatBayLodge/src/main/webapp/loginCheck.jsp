@@ -1,4 +1,4 @@
-<%@ page import="com.moffatbay.util.DatabaseBean" %>
+<%@ page import="userStuff.UserClass" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%
@@ -6,8 +6,8 @@
     String password = request.getParameter("password");
 
     // Uses DatabaseBean to connect to the database
-    DatabaseBean db = new DatabaseBean();
-    boolean isValid = db.validateUser(email, password);
+    UserClass db = new UserClass();
+    boolean isValid = db.loginCheck(email, password);
     db.close(); 
 
     // Checks to see it the users email and password are valid

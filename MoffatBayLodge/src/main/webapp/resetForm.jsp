@@ -2,7 +2,7 @@
 <%@ page import="java.sql.PreparedStatement" %>
 <%@ page import="java.sql.ResultSet" %>
 <%@ page import="java.sql.SQLException" %>
-<%@ page import="com.moffatbay.util.DatabaseBean" %>
+<%@ page import="userStuff.UserClass" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%
@@ -11,7 +11,7 @@
 
     // Checks to see if email address is valid
     if (email != null && !email.trim().isEmpty()) {
-        DatabaseBean db = new DatabaseBean();
+    	UserClass db = new UserClass();
         String sql = "SELECT * FROM CustomerLogin WHERE LOWER(email) = ?";
         try (PreparedStatement stmt = db.getConnection().prepareStatement(sql)) {
             stmt.setString(1, email.toLowerCase());
@@ -39,7 +39,7 @@
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&family=Roboto&display=swap" rel="stylesheet">
 
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
