@@ -1,93 +1,85 @@
 package userStuff;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-	
-	
-public class UserClass {
-	Connection conn; 
-	Statement stmt; 
-	private String fname; 
-	private String lname;
-	private int customerId;
-	
-	//DB connection stuff
-	private static String url = "jdbc:mysql://localhost:3306/moffatbay";
-	private static String user= "moffatbay_user";
-	private static String pass = "Moffat123!";
-			
-		public UserClass() { 
-				try { 
-					Class.forName("com.mysql.cj.jdbc.Driver");
-					conn = DriverManager.getConnection(url, user, pass);
-					stmt = conn.createStatement();
-					System.out.println("connection successful");
-				}
-				catch (Exception e) {
-					System.out.println("Something went wrong");
-					System.out.println(e);
-				}
-		}
-		
-		public void setFname(String name) {
-			this.fname = name;
-		}
-		
-		public String getFname() {
-			return this.fname;
-			
-		}
-		
-		public void setLname(String name) {
-			this.lname = name;
-		}
-		
-		public String getLname() {
-			return this.lname;
-		}
-		
-			
-		public boolean loginCheck(String email, String pass) {
-				ResultSet rs = null;
-				boolean success = true; 
-				
-				try {
-					rs = stmt.executeQuery("SELECT * FROM CustomerLogin WHERE email = '" + email + "'");
-					
-					//check if row exists, if it is, the email is incorrect. 
-					if (!rs.next()) { 
-						success = false;
-						System.out.print("Incorrect email");
-					}
-					else {
-						//check password
-						String Userpass = rs.getString("password_hash");
-						if (Userpass.equals(pass)) {
-							success = true;
-							this.customerId = rs.getInt("customer_id");  
-							
-						} else {
-							success =  false;
-							System.out.println("Incorrect password");
-							
-							}
-						
-					}
-					
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					System.out.println(e);
-					success =  false;
-					System.out.println("SQL ERROR");
-				}
-				
-				
-				return success; 
-				
-		}
-		
 
-	
+import org.mindrot.jbcrypt.BCrypt;
+
+import java.sql.*;
+
+public class UserClass {
+    private final String jdbcURL = "jdbc:mysql://localhost:3306/moffatbay";
+    private final String jdbcUsername = "moffatbay_user";
+    private final String jdbcPassword = "Moffat123!";
+
+    private Connection connection;
+
+    private String fname;
+    private String lname;
+    private int customerId;
+
+    public UserClass() {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // getters and setters for fname, lname, customerId
+    public String getFname() {
+        return fname;
+    }
+
+    public void setFname(String fname) {
+        this.fname = fname;
+    }
+
+    public String getLname() {
+        return lname;
+    }
+
+    public void setLname(String lname) {
+        this.lname = lname;
+    }
+
+    public int getCustomerId() {
+        return customerId;
+    }
+
+    // Validates user by email and plain password using bcrypt hash check
+    public boolean loginCheck(String email, String plainPassword) {
+        String sql = "SELECT customer_id, fname, lname, password_hash FROM CustomerLogin WHERE email = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, email);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    String hashedPassword = rs.getString("password_hash");
+                    if (BCrypt.checkpw(plainPassword, hashedPassword)) {
+                        this.customerId = rs.getInt("customer_id");
+                        this.fname = rs.getString("fname");
+                        this.lname = rs.getString("lname");
+                        return true;
+                    } else {
+                        System.out.println("Incorrect password");
+                        return false;
+                    }
+                } else {
+                    System.out.println("Email not found");
+                    return false;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    // Closes connection
+    public void close() {
+        try {
+            if (connection != null && !connection.isClosed())
+                connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
