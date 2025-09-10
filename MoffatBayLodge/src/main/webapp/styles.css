@@ -8,7 +8,7 @@ body {
   line-height: 1.6;
 }
 
-h1, h2 {
+h1, h2, h5{
   font-family: 'EB Garamond', serif;
   color: #254c37;
 }
@@ -97,7 +97,7 @@ p {
   text-align: center;
 }
 
-.hero h2 {
+.hero h2, {
   font-size: 1.5em;
   margin-bottom: 10px;
   text-align: center;
@@ -108,7 +108,7 @@ p {
   margin: 0 auto 20px;
 }
 
-.register-container {
+.register-container, .reservation-container {
  	width: 80%;           
     max-width: 600px;
     margin: 70px auto;    
@@ -259,4 +259,5 @@ footer {
 .footer-copy {
   font-size: 0.85em;
   color: #d4cbb8;
- 
+}
+
