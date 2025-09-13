@@ -9,7 +9,7 @@ import jakarta.servlet.ServletException;
 import org.mindrot.jbcrypt.BCrypt;
 
 @WebServlet("/Register")
-public class registerServlet extends HttpServlet {
+public class RegisterServlet extends HttpServlet {
 	/**
 	 * 
 	 */

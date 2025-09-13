@@ -28,7 +28,7 @@
           <li><a href="#">Attractions</a></li>
           <li><a href="#">About us</a></li>
           <li><a href="#">Contact Us</a></li>
-          <li><a href="#">Book a room!</a></li>
+          <li><a href="reservation.jsp">Book a room!</a></li>
         </ul>
       </nav>
     </div>
@@ -93,7 +93,7 @@
       <a href="Index.jsp">Home</a>
       <a href="#">FAQS</a>
       <a href="#">Contact Us</a>
-      <a href="#">Book Now!</a>
+      <a href="reservation.jsp">Book Now!</a>
     </div>
     <div class="footer-copy">
       &copy;MoffatBay2025
