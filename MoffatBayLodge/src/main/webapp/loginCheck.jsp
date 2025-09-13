@@ -5,7 +5,11 @@
     String email = request.getParameter("email");
     String password = request.getParameter("password");
 
+<<<<<<< HEAD
     // Userclass to connect to the database
+=======
+    // Uses DatabaseBean to connect to the database
+>>>>>>> 3f3b714a197c5575c2c6db9b3b185a20f0bc1668
     UserClass db = new UserClass();
     boolean isValid = db.loginCheck(email, password);
     db.close(); 
