@@ -30,8 +30,7 @@
           <li><a href="Index.jsp">Home</a></li>
           <li><a href="#">Suites</a></li>
           <li><a href="#">Attractions</a></li>
-          <li><a href="#">About us</a></li>
-          <li><a href="#">Contact Us</a></li>
+          <li><a href="about.jsp">About us</a></li>
           <li><a href="#">Book a room!</a></li>
         </ul>
       </nav>

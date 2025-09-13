@@ -26,8 +26,7 @@
           <li><a href="Index.jsp">Home</a></li>
           <li><a href="#">Suites</a></li>
           <li><a href="#">Attractions</a></li>
-          <li><a href="#">About us</a></li>
-          <li><a href="#">Contact Us</a></li>
+          <li><a href="about.jsp">About us</a></li>
           <li><a href="reservation.jsp">Book a room!</a></li>
         </ul>
       </nav>
@@ -46,7 +45,7 @@
   <section class="hero">
     <h2>Your Escape to Nature Starts Here</h2>
     <p>Discover the beauty of Moffat Bay: where cozy suites, breathtaking views, and endless outdoor adventures await. Plan your getaway today.</p>
-    <a href="#" class="btn primary">Book Now!</a>
+    <a href="reservation.jsp" class="btn primary">Book Now!</a>
   </section>
 
   <!-- Features Section -->

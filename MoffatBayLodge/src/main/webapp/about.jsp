@@ -28,7 +28,7 @@
           <li><a href="Index.jsp">Home</a></li>
           <li><a href="#">Suites</a></li>
           <li><a href="#">Attractions</a></li>
-          <li><a href="about.jsp">About us</a></li>
+          <li><a href="#">About us</a></li>
           <li><a href="#">Contact Us</a></li>
           <li><a href="reservation.jsp">Book a room!</a></li>
         </ul>
@@ -44,32 +44,40 @@
     </div>
   </header>
   
-  <h2>Welcome Back!</h2>
-  
-  <!-- Login Box -->
-<section class="register-container">
-  
-  
-  <form action="loginCheck.jsp" method="POST" class="login-form">
-    <label for="email">Email</label>
-    <input type="email" id="email" name="email" placeholder="Enter your email" required> <br>
+ <!-- About Us Section -->
+  <h2>About Us</h2>
+ 
+<div class="about-us">
+    <img src="images/MoffatBayLobby.jpg" alt="Lobby" class="about-image imageLeft">
+  <p>Welcome to the Moffat Bay Lodge, a hidden gem where the forest meets the sea. 
+     Nestled along the shores of a peaceful bay, our lodge was built on the belief that relaxation comes from slowing down, 
+     reconnecting with nature, and creating memories with the people who matter most.</p>
+</div>
 
-    <label for="password">Password</label>
-    <input type="password" id="password" name="password" placeholder="Enter your password" required>
 
-    <div class="login">
-      <button type="submit" class="btn primary">Login</button>
-       <button type="button" class="btn primary" onclick="window.location.href='resetRequest.jsp'">Reset Password</button>
-    </div>
-    
-  </form>
+<div class="about-us">
+    <p>What began as a simple rest stop for travelers seeking the quiet beauty of nature has grown into a place 
+       where guests can experience the best of the Pacific Northwest. From the call of whales echoing through the 
+       bay to the rustle of pine trees on our numerous hiking trails, every corner of Moffat Bay holds a story waiting to 
+       be discovered. </p>
+     <img src="images/MoffatBayPool.jpg" alt="Lobby" class="about-image imageRight">
+</div>
 
-  <div class="signup-section">
-    <p>Don't have an account? <br> No worries! Create an account here: </p>
-    <button type="button" class="btn primary" onclick="window.location.href='registration.jsp'">Sign Up</button>
-  </div>
-</section>
-
+<!-- Contact Us Section -->
+<div class="contact-us">
+  <h2>Contact Us</h2>
+  <p><strong>Phone:</strong> (+1) 807-777-7367</p>
+  <p><strong>Email:</strong> <a href="mailto:Lodge@MoffatBay.com">Lodge@MoffatBay.com</a></p>
+  <p><strong>Address:</strong></p>
+  <address>
+    2456 Lodge Dr.<br>
+    New Haven, CT<br>
+    28271
+  </address>
+</div>
+<div class="reservation-button">
+    <a href="reservation.jsp" class="btn primary">Book Now</a>
+</div>
 
  
   <!-- Footer -->
