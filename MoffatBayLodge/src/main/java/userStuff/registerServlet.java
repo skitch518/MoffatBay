@@ -9,7 +9,12 @@ import jakarta.servlet.ServletException;
 import org.mindrot.jbcrypt.BCrypt;
 
 @WebServlet("/Register")
-public class RegisterServlet extends HttpServlet {
+public class registerServlet extends HttpServlet {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
