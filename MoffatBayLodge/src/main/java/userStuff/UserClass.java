@@ -34,6 +34,76 @@ public class UserClass {
         }
     }
 
+<<<<<<< HEAD
+    // Getters and setters
+    public String getFname() { return fname; }
+    public void setFname(String fname) { this.fname = fname; }
+    public String getLname() { return lname; }
+    public void setLname(String lname) { this.lname = lname; }
+    public int getCustomerId() { return customerId; }
+
+    public boolean registerUser(String firstName, String lastName, String email, String phone,
+                                String address, String city, String state, String postalCode,
+                                String country, String password) {
+
+        try {
+            // 1. Check if email exists
+            String checkSql = "SELECT COUNT(*) FROM CustomerLogin WHERE email = ?";
+            try (PreparedStatement checkStmt = connection.prepareStatement(checkSql)) {
+                checkStmt.setString(1, email);
+                try (ResultSet rs = checkStmt.executeQuery()) {
+                    if (rs.next() && rs.getInt(1) > 0) {
+                        return false; // Email already exists
+                    }
+                }
+            }
+
+            // 2. Hash password
+            String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
+
+            // 3. Insert into Customers table
+            String customerSql = "INSERT INTO Customers (first_name, last_name, phone, address, city, state, postal_code, country) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            int newCustomerId;
+            try (PreparedStatement customerStmt = connection.prepareStatement(customerSql, Statement.RETURN_GENERATED_KEYS)) {
+                customerStmt.setString(1, firstName);
+                customerStmt.setString(2, lastName);
+                customerStmt.setString(3, phone);
+                customerStmt.setString(4, address);
+                customerStmt.setString(5, city);
+                customerStmt.setString(6, state);
+                customerStmt.setString(7, postalCode);
+                customerStmt.setString(8, country);
+
+                int rows = customerStmt.executeUpdate();
+                if (rows == 0) return false;
+
+                try (ResultSet generatedKeys = customerStmt.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        newCustomerId = generatedKeys.getInt(1);
+                    } else return false;
+                }
+            }
+
+            // 4. Insert into CustomerLogin
+            String loginSql = "INSERT INTO CustomerLogin (customer_id, email, password_hash) VALUES (?, ?, ?)";
+            try (PreparedStatement loginStmt = connection.prepareStatement(loginSql)) {
+                loginStmt.setInt(1, newCustomerId);
+                loginStmt.setString(2, email);
+                loginStmt.setString(3, hashedPassword);
+
+                int rows = loginStmt.executeUpdate();
+                return rows > 0;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean loginCheck(String email, String plainPassword) {
+        String sql = "SELECT customer_id, first_name, last_name, password_hash FROM CustomerLogin JOIN Customers ON CustomerLogin.customer_id = Customers.customer_id WHERE email = ?";
+=======
 
   // Getters and setters
     public String getFname() {
@@ -153,6 +223,7 @@ public class UserClass {
                      "JOIN Customers c ON cl.customer_id = c.customer_id " +
                      "WHERE cl.email = ?";
 
+>>>>>>> 3f3b714a197c5575c2c6db9b3b185a20f0bc1668
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, email);
             try (ResultSet rs = stmt.executeQuery()) {
@@ -163,19 +234,25 @@ public class UserClass {
                         this.fname = rs.getString("first_name");
                         this.lname = rs.getString("last_name");
                         return true;
+<<<<<<< HEAD
+                    }
+=======
                     } else {
                         return false;
                     }
                 } else {
                     return false;
+>>>>>>> 3f3b714a197c5575c2c6db9b3b185a20f0bc1668
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
         }
+        return false;
     }
 
+<<<<<<< HEAD
+=======
 
     // Saves user profile and login info in a transaction
     public boolean saveUser() {
@@ -252,12 +329,10 @@ public class UserClass {
 
     // Close connection
 
+>>>>>>> 3f3b714a197c5575c2c6db9b3b185a20f0bc1668
     public void close() {
         try {
-            if (connection != null && !connection.isClosed())
-                connection.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+            if (connection != null && !connection.isClosed()) connection.close();
+        } catch (SQLException e) { e.printStackTrace(); }
     }
 }
