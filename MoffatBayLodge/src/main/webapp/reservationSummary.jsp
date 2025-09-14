@@ -1,4 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import= "java.time.Period" %>
+<%@ page import= "java.time.*" %>
+<%@ page import = "userStuff.ReservationManager" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,55 +51,94 @@
   
     <!-- Success Message -->
   <section class="register-container">
+  
+  <% 
+  	String fname = session.getAttribute("fname").toString();
+  	String lname = session.getAttribute("lname").toString();
+  	String email = session.getAttribute("userEmail").toString();
+  	String phone = request.getParameter("phone");
+  	String checkin = request.getParameter("checkin");
+  	String checkout = request.getParameter("checkout");
+  	String guests = request.getParameter("guests");
+  	String roomType = request.getParameter("roomType");
+  	
+	LocalDate checkIn = LocalDate.parse(checkin);
+	LocalDate checkOut = LocalDate.parse(checkout);
+	
+	Period period = Period.between(checkIn, checkOut);
+	int lengthOfStay = period.getDays();
+	
+	//get total price]
+	ReservationManager res = new ReservationManager();
+	res.setPrice(roomType, lengthOfStay);
+	int totalPrice = res.getPrice();
+	
+
+	
+//getprice needed
+  	
+  	
+  %>
     <h2 style="text-decoration: underline;">Reservation Summary</h2>
 
-    <p style="font-size: 15px; color: green;">&#x2713 Your Reservation Has Been Confirmed. </p>
 
     <table border="1" cellpadding="10" cellspacing="0" style="margin-top: 20px;">
       <tr>
         <th>Name: </th>
-        <td><%= request.getParameter("firstName") %> <%= request.getParameter("lastName") %></td>
+        <td><%= fname %> <%= lname %></td>
       </tr>
       <tr>
         <th>Email:</th>
-        <td><%= request.getParameter("email") %></td>
+        <td><%= email %></td>
       </tr>
       <tr>
         <th>Phone:</th>
-        <td><%= request.getParameter("phone") %></td>
+        <td><%= phone  %></td>
       </tr>
       <tr>
         <th>Check-In:</th>
-        <td><%= request.getParameter("checkin") %></td>
+        <td><%= checkin  %></td>
       </tr>
       <tr>
         <th>Check-Out:</th>
-        <td><%= request.getParameter("checkout") %></td>
+        <td><%= checkout %></td>
       </tr>
       <tr>
         <th>Guests:</th>
-        <td><%= request.getParameter("guests") %></td>
+        <td><%= guests %></td>
       </tr>
       <tr>
         <th>Room Type:</th>
-        <td><%= request.getParameter("roomType") %></td>
-      <tr>
-        <th>Length of Stay:</th>
-        <td><%= request.getParameter("lengthOfStay") %></td>
-      </tr>
-      <tr>
-  		<th>Total Price</th>
-  		<td>$<%= request.getAttribute("totalCost") %></td>
-      </tr>
-      <tr>
-  		<th>Reservation Created:</th>
-  		<td><%= new java.util.Date() %></td>
-	</tr>
+        <td><%= roomType %></td>
+       </tr>
+         <tr>
+        <th>Length Of Stay</th>
+        <td><%= lengthOfStay %> nights </td>
+       </tr>
+       <th>TotalPrice</th>
+        <td>$<%= totalPrice %></td>
+       </tr>
+       
+ 		<%res.close();%>
     </table>
-     <p style="color: #392A16;"><b> Thanks for booking with Moffat Bay Lodge!</b></p>
+    
 
     <div class="button-wrapper">
-      <a href="reservation.jsp" class="btn primary">Book Another Reservation</a>
+     <p style="color: #392A16;"><b> Is this correct? </b></p>
+    <!--  sending values to servlet -->
+	<form method="post" action="Reserve">
+	    <input type="hidden" name="checkin" value="<%= checkin %>">
+	    <input type="hidden" name="checkout" value="<%= checkout %>">
+	    <input type="hidden" name="length" value="<%= lengthOfStay %>">
+	    <input type="hidden" name="guests" value="<%= guests %>">
+	    <input type="hidden" name="roomType" value="<%= roomType %>">
+	    <input type="hidden" name="email" value="<%= email %>">
+	    
+	    <button type="submit" class="btn primary">Yes! Confirm Reservation</button>
+	    <a href= "reservation.jsp" class= "btn primary">No. Take me back</a>
+	</form>
+      
+     
     </div>
   </section>
 

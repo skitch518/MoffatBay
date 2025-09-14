@@ -27,10 +27,11 @@
       <h1 class="welcome-message">Moffat Bay Lodge</h1>
       <nav class="main-nav">
         <ul>
-          <li><a href="Index.jsp">Home</a></li>
+          <li><a href="Index.jsp">Home</a></li>  
           <li><a href="#">Suites</a></li>
           <li><a href="#">Attractions</a></li>
-          <li><a href="about.jsp">About us</a></li>
+          <li><a href="#">About us</a></li>
+          <li><a href="#">Contact Us</a></li>
           <li><a href="#">Book a room!</a></li>
         </ul>
       </nav>
@@ -38,51 +39,69 @@
 
     <div class="header-right">
       <div class="auth-links">
-        <img src="images/profileicon.png" alt="Profile Icon" class="profile-icon">
-        <a href="loginPage.jsp">Login</a>
-        <a href="registration.jsp">Sign Up</a>
+      <% 
+      	if(session.getAttribute("fname") != null){
+      		%>
+      		<img src="images/profileicon.png" alt="Profile Icon" class="profile-icon">
+      		<%
+      		out.print("Hello, " + session.getAttribute("fname") + "!");
+      		%>
+      		<a href="logoutPage.jsp">Logout</a>
+      		<%
+      	}else{
+	      	%>
+	        <img src="images/profileicon.png" alt="Profile Icon" class="profile-icon">
+	        <a href="loginPage.jsp">Login</a>
+	        <a href="registration.jsp">Sign Up</a>
+	        <%
+	      	}
+	        %>
       </div>
     </div>
   </header>
   
-    <section class="register-container">
-    <h2 style="text-decoration: underline;">Book a Reservation</h2>
+   
     
-    	<form action="ReservationServlet" method="post">
+    	<%
+    	System.out.println(session.getAttribute("fname"));
+    	  if (session.getAttribute("fname") != null){
+
+    	%>
+    	 <section class="register-container">
+    	 <h2 style="text-decoration: underline;">Book a Reservation</h2>
+    	<form action="reservationSummary.jsp" method="post">
         	<label for="firstName">First Name:</label>
-        	<input type="text" name="firstName" id="firstName" required>
+        	<input type="text" name="firstName" id="firstName" value= <%=session.getAttribute("fname") %> disabled>
 
         	<label for="lastName">Last Name:</label>
-        	<input type="text" name="lastName" id="lastName" required>
+        	<input type="text" name="lastName" id="lastName" value= <%=session.getAttribute("lname") %> disabled>
         	<br>
         	<label for="email">Email:</label>
-        	<input type="email" name="email" id="email" required>
+        	<input type="email" name="email" id="email" value= <%=session.getAttribute("userEmail") %> disabled>
         	<br>
         	<label for="phone">Phone:</label>
         	<input type="tel" name="phone" id="phone" required>
         	<br>
         	<label for="checkin">Check-In Date:</label>
-			<input type="text" name="checkin" id="checkin" required>
+			<input type="date" name="checkin" id="checkin" required>
 			<br>
 			<label for="checkout">Check-Out Date:</label>
-			<input type="text" name="checkout" id="checkout" required>
+			<input type="date" name="checkout" id="checkout" required>
 
-			<script>
-  			flatpickr("#checkin", { dateFormat: "Y-m-d" });
-  			flatpickr("#checkout", { dateFormat: "Y-m-d" });
-			</script>
+		
+			
 			<br>
         	<label for="guests">Number of Guests:</label>
-        	<input type="number" name="guests" id="guests" min="1" required>
+        	<input type="number" name="guests" id="guests" min="1" max= "4" required>
         	<br>
         	<label for="roomType">Room Type:</label>
         	<select name="roomType" id="roomType" required>
-            	<option value="Bay View">Bay View Suite</option>
-            	<option value="Adventure">Adventure Suite</option>
-            	<option value="Whale Watcher">Whale Watcher Suite</option>
-            	<option value="Divers Retreat">Divers Retreat Suite</option>
-            	<option value="Family Lodgfe">Family Lodge Suite</option>
-            	<option value="Luxury Spa">Luxury Spa Suite</option>
+            	<option value="Bay View Suite">Bay View Suite</option>
+            	<option value="Adventure Suite">Adventure Suite</option>
+            	<option value="Whale Watcher Suite">Whale Watcher Suite</option>
+            	<option value="Divers Retreat Suite">Divers Retreat Suite</option>
+            	<option value="Family Lodge Suite">Family Lodge Suite</option>
+            	<option value="Luxury Spa Suite">Luxury Spa Suite</option>
         	</select>
 			
 			<div class="button-wrapper">
@@ -90,6 +109,17 @@
 			</div>
     	</form>
 	</section>
+	
+	<% } else{ 
+			%>
+			<p> ** Psst! It looks like you're not logged in! Please log in <a href="loginPage.jsp">here</a> before booking</p>
+			
+		<%
+	}
+    	  
+    	  
+	
+	%>
 
       <!-- Footer -->
   <footer>
