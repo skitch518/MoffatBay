@@ -97,7 +97,7 @@ p {
   text-align: center;
 }
 
-.hero h2, {
+.hero h2 {
   font-size: 1.5em;
   margin-bottom: 10px;
   text-align: center;
@@ -229,8 +229,81 @@ p {
   margin: 0 8px;
 }
 
-form-row{
+.form-row{
 	text-align: left;
+}
+
+/* About Us */
+.about-us {
+  display: flex;
+  background-color: #ffffff;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40px 20px;
+  box-sizing: border-box;
+  width: 100vw;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto 40px;
+}
+
+.about-image {
+  flex: 0 0 auto;
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.about-us p {
+  flex: 1;
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+.imageLeft {
+  order: 0;
+}
+
+.imageRight {
+  order: 1;
+}
+
+/* Contact */
+.contact-us {
+  background-color: #ffffff;
+  padding: 40px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+  margin: 40px auto;
+  max-width: 1200px;
+  width: 100vw;
+  color: #254c37;
+}
+
+.contact-us h2 {
+  font-family: 'EB Garamond', serif;
+  margin-bottom: 20px;
+  color: #254c37;
+}
+
+.contact-us a {
+  color: #254c37;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.contact-us a:hover {
+  text-decoration: underline;
+}
+
+.contact-us address {
+  font-style: normal;
+  line-height: 1.5;
+  margin-top: 10px;
 }
 
 /* Footer */
