@@ -44,33 +44,46 @@
 <body>
 
 <!-- Header -->
-<header class="header-container">
+ <header class="header-container">
     <div class="header-left">
-        <img src="images/MoffatBayLogo3.png" alt="Moffat Bay Lodge Logo" class="logo-img">
+      <img src="images/MoffatBayLogo3.png" alt="Moffat Bay Lodge Logo" class="logo-img">
     </div>
 
     <div class="header-center">
-        <h1 class="welcome-message">Moffat Bay Lodge</h1>
-        <nav class="main-nav">
-            <ul>
-                <li><a href="Index.jsp">Home</a></li>
-                <li><a href="#">Suites</a></li>
-                <li><a href="#">Attractions</a></li>
-                <li><a href="#">About us</a></li>
-                <li><a href="#">Contact Us</a></li>
-                <li><a href="#">Book a room!</a></li>
-            </ul>
-        </nav>
+      <h1 class="welcome-message">Moffat Bay Lodge</h1>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="Index.jsp">Home</a></li>
+          <li><a href="#">Suites</a></li>
+          <li><a href="#">Attractions</a></li>
+          <li><a href="about.jsp">About us</a></li>
+          <li><a href="reservation.jsp">Book a room!</a></li>
+        </ul>
+      </nav>
     </div>
 
     <div class="header-right">
-        <div class="auth-links">
+      <div class="auth-links">
+      <% 
+          if(session.getAttribute("fname") != null){
+              %>
+              <img src="images/profileicon.png" alt="Profile Icon" class="profile-icon">
+              <%
+              out.print("Hello, " + session.getAttribute("fname") + "!");
+              %>
+              <a href="logoutPage.jsp">Logout</a>
+              <%
+          }else{
+              %>
             <img src="images/profileicon.png" alt="Profile Icon" class="profile-icon">
             <a href="loginPage.jsp">Login</a>
             <a href="registration.jsp">Sign Up</a>
-        </div>
+            <%
+              }
+            %>
+      </div>
     </div>
-</header>
+  </header>
 
 <main>
     <div class="content-container">
@@ -92,17 +105,17 @@
 </main>
 
 <!-- Footer -->
-<footer>
+ <footer>
     <div class="footer-nav">
-        <a href="Index.jsp">Home</a>
-        <a href="#">FAQS</a>
-        <a href="#">Contact Us</a>
-        <a href="#">Book Now!</a>
+      <a href="Index.jsp">Home</a>
+      <a href="#">FAQS</a>
+      <a href="about.jsp">About Us</a>
+      <a href="reservation.jsp">Book Now!</a>
     </div>
     <div class="footer-copy">
-        &copy; MoffatBay 2025
+      &copy;MoffatBay2025
     </div>
-</footer>
+  </footer>
 
 </body>
 </html>

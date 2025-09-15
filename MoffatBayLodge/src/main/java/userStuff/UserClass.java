@@ -188,6 +188,7 @@ public class UserClass {
         return success;
     }
 
+
     // Closes connection
     public void close() {
         try {
