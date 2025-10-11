@@ -29,6 +29,15 @@ public class RegisterServlet extends HttpServlet {
             request.getRequestDispatcher("registration.jsp").forward(request, response);
             return;
         }
+        
+     // Password strength validation
+        String passwordPattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
+        if (!password.matches(passwordPattern)) {
+            request.setAttribute("errorMessage", "Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character.");
+            request.getRequestDispatcher("registration.jsp").forward(request, response);
+            return;
+        }
+
 
         if (!password.equals(confirmPassword)) {
             request.setAttribute("errorMessage", "Passwords do not match.");

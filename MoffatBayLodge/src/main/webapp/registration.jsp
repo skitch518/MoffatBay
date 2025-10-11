@@ -57,6 +57,14 @@
   </header>
   
     <h2>Create Your Account</h2>
+   
+    <% String errorMessage = (String) request.getAttribute("errorMessage"); %>
+    <% if (errorMessage != null) { %>
+    <div style="color: red; font-weight: bold; margin-bottom: 10px;">
+        <%= errorMessage %>
+    </div>
+   <% } %>
+    
     
 	<section class="register-container">	
     	<!-- Registration Form -->
